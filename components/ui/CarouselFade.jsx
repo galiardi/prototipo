@@ -6,26 +6,26 @@ const elements = [
   {
     id: '1',
     title: 'Ahorro',
-    imgUrl: '/ahorro.jpeg',
+    imgUrl: '/carrousel/ahorro.jpeg',
     url: '/ahorro',
   },
   {
     id: '2',
     title: 'Inversión',
-    imgUrl: '/inversion2.webp',
+    imgUrl: '/carrousel/inversion2.webp',
     url: '/inversion',
   },
   {
     id: '3',
     title: 'Vivienda',
-    imgUrl: '/vivienda.jpg',
+    imgUrl: '/carrousel/vivienda.jpg',
     url: '/vivienda',
   },
   {
     id: '4',
     title: 'Previsión',
-    imgUrl: '/prevision.avif',
-    url: 'prevision',
+    imgUrl: '/carrousel/prevision.jpg',
+    url: '/prevision',
   },
 ];
 
@@ -41,7 +41,7 @@ export const CarouselFade = () => {
                 src={element.imgUrl}
                 alt={element.title}
                 width={557}
-                height={418}
+                height={360}
                 priority={i === 0}
               />
               <Carousel.Caption>

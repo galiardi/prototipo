@@ -1,12 +1,15 @@
+import { useContext } from 'react';
 import { Box, Typography } from '@mui/material';
 
 import { Logger, MainCarousel } from '../components/ui';
 import { useAuth } from '../context/auth';
 import { Layout } from '../components/layouts';
+import { TipsContext } from '../context/tips';
 
 const Home = () => {
   const { user } = useAuth();
-
+  const { tips } = useContext(TipsContext);
+  console.log(tips);
   return (
     <Layout>
       {!user && (

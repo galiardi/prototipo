@@ -1,8 +1,8 @@
 {
-  "name": "tiendita nomada",
-  "short_name": "nomada",
-  "theme_color": "rgb(191, 185, 219)",
-  "background_color": "rgb(191, 185, 219)",
+  "name": "F-TIPS",
+  "short_name": "F-TIPS",
+  "theme_color": "white",
+  "background_color": "white",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
