@@ -32,7 +32,8 @@ export const Navbar = () => {
       const { url } = await response.json();
       console.log(url);
       if (url) router.push(url);
-    } catch {
+    } catch (e) {
+      console.log(e);
       return;
     }
   };
