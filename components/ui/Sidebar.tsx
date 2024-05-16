@@ -18,7 +18,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPiggyBank } from '@fortawesome/free-solid-svg-icons';
+import { faPiggyBank, faSackDollar } from '@fortawesome/free-solid-svg-icons';
 import { faMoneyBillTrendUp } from '@fortawesome/free-solid-svg-icons';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faPersonCane } from '@fortawesome/free-solid-svg-icons';
@@ -54,7 +54,7 @@ const pages: item[] = [
 const categories: item[] = [
   {
     text: 'Ahorro',
-    icon: <FontAwesomeIcon icon={faPiggyBank} />,
+    icon: <FontAwesomeIcon icon={faSackDollar} />,
     url: '/ahorro',
   },
   {

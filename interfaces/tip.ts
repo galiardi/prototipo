@@ -1,4 +1,4 @@
-export interface Tip {
+export interface TipInterface {
   id: string;
   category: string;
   title: string;

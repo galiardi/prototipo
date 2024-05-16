@@ -4,6 +4,7 @@ import { lightTheme } from '../themes';
 import { AuthProvider } from '../context/auth';
 import { UIProvider } from '../context/ui';
 import { TipsProvider } from '../context/tips';
+import { FavoritesProvider } from '../context/favorites';
 
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -15,14 +16,16 @@ import '../styles/globals.css';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <UIProvider>
-        <TipsProvider>
-          <ThemeProvider theme={lightTheme}>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </TipsProvider>
-      </UIProvider>
+      <FavoritesProvider>
+        <UIProvider>
+          <TipsProvider>
+            <ThemeProvider theme={lightTheme}>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </TipsProvider>
+        </UIProvider>
+      </FavoritesProvider>
     </AuthProvider>
   );
 }

@@ -1,10 +1,12 @@
 import { createContext } from 'react';
-import { Tip } from '../../interfaces';
+import { TipInterface } from '../../interfaces';
 
 interface ContextProps {
-  tips: Tip[];
-  [category: string]: Tip[] | { [id: string]: Tip | undefined };
-  tipsByIdObj: { [id: string]: Tip | undefined };
+  tips: TipInterface[];
+  [category: string]:
+    | TipInterface[]
+    | { [id: string]: TipInterface | undefined };
+  tipsByIdObj: { [id: string]: TipInterface | undefined };
 }
 
 export const TipsContext = createContext({} as ContextProps);

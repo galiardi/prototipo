@@ -8,3 +8,5 @@ export * from './MainCarousel';
 export * from './Logo';
 export * from './CopyToast';
 export * from './Uploader';
+export * from './Tip';
+export * from './TipInFavorites';

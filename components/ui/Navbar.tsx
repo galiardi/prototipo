@@ -14,6 +14,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { UIContext } from '../../context/ui';
 import { useAuth } from '../../context/auth';
+import { Svg } from './Svg';
 
 export const Navbar = () => {
   const { user } = useAuth();
@@ -53,14 +54,16 @@ export const Navbar = () => {
             <HomeOutlinedIcon />
           </IconButton>
         )}
-        <Box onClick={() => router.push('/')}>
-          <Typography
-            variant="h6"
-            fontFamily={''}
-            sx={{ marginTop: '0.5rem', fontWeight: 'bold' }}
-          >
+        <Box
+          onClick={() => router.push('/')}
+          display={'flex'}
+          justifyContent={'center'}
+          alignItems={'center'}
+        >
+          <Typography variant="h6" fontFamily={''} sx={{ fontWeight: 'bold' }}>
             F-TIPS
           </Typography>
+          <Svg src={'/billtrendup.svg'} width={14} height={14} />
         </Box>
         <Box sx={{ position: 'relative' }}>
           {user ? (

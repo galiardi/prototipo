@@ -17,7 +17,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="icon" href="logo.svg"></link>
+          <link rel="icon" href="billtrendup.svg"></link>
           <link rel="preconnect" href="https://fonts.googleapis.com"></link>
           <link
             rel="preconnect"
@@ -29,6 +29,8 @@ class MyDocument extends Document {
             rel="stylesheet"
           ></link>
           <link rel="manifest" href="/manifest.json" />
+          <meta name="description" content="Tips financieros" key="desc" />
+          <meta name="image" content="/billtrendup.svg" key="image" />
         </Head>
         <body>
           <Main />

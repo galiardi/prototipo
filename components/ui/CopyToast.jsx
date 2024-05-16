@@ -11,8 +11,9 @@ export const CopyToast = () => {
       show={show}
       delay={3000}
       autohide
+      style={{ width: '15rem', textAlign: 'center' }}
     >
-      <Toast.Body>Producto copiado en el portapapeles!</Toast.Body>
+      <Toast.Body>Tip copiado en el portapapeles!</Toast.Body>
     </Toast>
   );
 };

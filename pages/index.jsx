@@ -1,15 +1,17 @@
 import { useContext } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 
-import { Logger, MainCarousel } from '../components/ui';
+import { Logger, MainCarousel, Tip } from '../components/ui';
 import { useAuth } from '../context/auth';
 import { Layout } from '../components/layouts';
 import { TipsContext } from '../context/tips';
+import { FavoritesContext } from '../context/favorites';
 
 const Home = () => {
   const { user } = useAuth();
   const { tips } = useContext(TipsContext);
-  console.log(tips);
+  const { favorites } = useContext(FavoritesContext);
+
   return (
     <Layout>
       {!user && (
@@ -30,6 +32,15 @@ const Home = () => {
         >
           - Tips financieros -
         </Typography>
+      </Box>
+      <Box sx={{ width: '90%' }}>
+        <Grid container xs={12} spacing={2}>
+          {tips.map((tip, i) => {
+            return (
+              <Tip key={i} tip={tip} isFavorite={favorites.includes(tip.id)} />
+            );
+          })}
+        </Grid>
       </Box>
     </Layout>
   );
