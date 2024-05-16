@@ -35,19 +35,13 @@ export const Tip = ({ tip, isFavorite }) => {
   const { showCopyToast } = useContext(UIContext);
   const { user } = useAuth();
   const { favorites } = useContext(FavoritesContext);
-
   const share = () => {
-    const { href } = new URL(location.href);
     if (navigator.share) {
       navigator.share({
-        title: tip.title,
-        text: tip.text,
-        url: href,
+        url: `https://ftips.vercel.app/tips/${tip.id}`,
       });
     } else {
-      navigator.clipboard.writeText(
-        `${tip.title}\n${tip.description}\n${href}`
-      );
+      navigator.clipboard.writeText(`https://ftips.vercel.app/tips/${tip.id}`);
       showCopyToast(true);
     }
   };

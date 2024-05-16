@@ -6,7 +6,6 @@ import { useAuth } from '../../context/auth';
 export const FavoritesProvider = ({ children }) => {
   const [state, setState] = useState([]);
   const { user } = useAuth();
-  console.log(state);
   useEffect(() => {
     if (!user) return;
     const db = firebase.firestore();

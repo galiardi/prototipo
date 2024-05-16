@@ -24,17 +24,17 @@ export const Footer = () => {
           href={`https://wa.me/56953295712/?text=Hola,%20escribo%20desde%20https://ftips.vercel.app%para%sugerir`}
           icon={<WhatsAppIcon />}
         />
-        <Box
-          sx={{
-            position: 'absolute',
-            zIndex: '100',
-            right: '0.5rem',
-            top: '-3rem',
-          }}
-        >
-          <CopyToast />
-        </Box>
       </BottomNavigation>
+      <Box
+        sx={{
+          position: 'absolute',
+          zIndex: '100',
+          right: '0.5rem',
+          top: '-3rem',
+        }}
+      >
+        <CopyToast />
+      </Box>
     </Box>
   );
 };
