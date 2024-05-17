@@ -2,6 +2,7 @@ import { FC } from 'react';
 import Head from 'next/head';
 import { Box } from '@mui/material';
 import { Navbar, Sidebar, Footer } from '../ui';
+import { SigninModal } from '../ui/modals';
 
 interface Props {
   title?: string;
@@ -29,6 +30,7 @@ export const Layout: FC<Props> = ({ title = 'f-tips', children }) => {
         {children}
       </Box>
       <Footer />
+      <SigninModal />
     </div>
   );
 };

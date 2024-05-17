@@ -56,9 +56,9 @@ export default function TipPage() {
       </Head>
       <Layout>
         <Box sx={{ width: '90%' }}>
-          <Grid container xs={12} spacing={2}>
+          <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Paper sx={{ padding: '0.5rem 1rem' }}>
+              <Paper sx={{ padding: '1rem', marginTop: '1rem' }}>
                 <Grid container spacing={0}>
                   <Grid
                     item
@@ -72,8 +72,10 @@ export default function TipPage() {
                   >
                     <Typography sx={{ fontWeight: 'bold' }}>{title}</Typography>
                     <Divider />
-                    <Box sx={{ paddingY: '0.5rem' }}>
-                      <Typography>{description}</Typography>
+                    <Box sx={{ paddingY: '1rem' }}>
+                      <Typography textAlign={'justify'}>
+                        {description}
+                      </Typography>
                     </Box>
                     <Divider />
 

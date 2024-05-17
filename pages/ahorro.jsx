@@ -1,17 +1,39 @@
-import { Box, Typography } from '@mui/material';
+import { useContext } from 'react';
+import Image from 'next/image';
+import { Box, Typography, Grid } from '@mui/material';
 import { Layout } from '../components/layouts';
+import { Tip } from '../components/ui';
+import { TipsContext } from '../context/tips';
+import { FavoritesContext } from '../context/favorites';
 
 const Ahorro = () => {
-  // const { productosDisponibles } = useContext(ProductosContext);
-  // const Ahorro = productosDisponibles.filter(
-  //   (producto) => producto.category === 'Ahorro'
-  // );
+  const { tips } = useContext(TipsContext);
+  const tipsFiltered = tips.filter((tip) => tip.category === 'ahorro');
+  const { favorites } = useContext(FavoritesContext);
+
   return (
     <Layout>
-      <Box sx={{ padding: '1rem' }}>
+      <Box sx={{ paddingBottom: '0.5rem' }}>
         <Typography variant="h6">Ahorro</Typography>
       </Box>
-      {/* <ItemList productos={Ahorro} /> */}
+      <Box marginBottom={'1rem'}>
+        <Image
+          src={'/images/ahorro.jpeg'}
+          width={150}
+          height={150}
+          alt=""
+          style={{ borderRadius: '100%' }}
+        />
+      </Box>
+      <Box sx={{ width: '90%' }}>
+        <Grid container spacing={2}>
+          {tipsFiltered.map((tip, i) => {
+            return (
+              <Tip key={i} tip={tip} isFavorite={favorites.includes(tip.id)} />
+            );
+          })}
+        </Grid>
+      </Box>
     </Layout>
   );
 };

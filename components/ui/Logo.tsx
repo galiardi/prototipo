@@ -11,8 +11,8 @@ export const Logo = () => {
         paddingBottom: '2rem',
       }}
     >
-      <Svg src="/logo.svg" height={56} width={56} />
-      <Typography sx={{ fontFamily: 'Sacramento' }}>tiendita nomada</Typography>
+      <Svg src="/billtrendup.svg" height={32} width={32} />
+      <Typography fontWeight={'bold'}>F-TIPS</Typography>
     </Box>
   );
 };

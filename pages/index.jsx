@@ -37,7 +37,12 @@ const Home = () => {
         <Grid container spacing={2}>
           {tips.map((tip, i) => {
             return (
-              <Tip key={i} tip={tip} isFavorite={favorites.includes(tip.id)} />
+              <Tip
+                key={i}
+                tip={tip}
+                isFavorite={favorites.includes(tip.id)}
+                categoryLink
+              />
             );
           })}
         </Grid>

@@ -8,10 +8,13 @@ import {
   Box,
   CardActions,
   IconButton,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from '@mui/material';
 import ShareIcon from '@mui/icons-material/Share';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import CloseIcon from '@mui/icons-material/Close';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import firebase from '../../firebase/client';
 import { useAuth } from '../../context/auth';
 import { UIContext } from '../../context/ui';
@@ -72,11 +75,24 @@ export const TipInFavorites = ({ tip }) => {
               alignItems: 'left',
             }}
           >
-            <Typography sx={{ fontWeight: 'bold' }}>{title}</Typography>
+            <Accordion style={{ boxShadow: 'none' }}>
+              <AccordionSummary
+                expandIcon={<ArrowDropDownIcon />}
+                aria-controls="panel2-content"
+                id="panel2-header"
+              >
+                <Typography sx={{ fontWeight: 'bold' }}>{title}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography textAlign={'justify'}>{description}</Typography>
+              </AccordionDetails>
+              <AccordionSummary></AccordionSummary>
+            </Accordion>
+            {/* <Typography sx={{ fontWeight: 'bold' }}>{title}</Typography>
             <Divider />
             <Box sx={{ paddingY: '0.5rem' }}>
-              <Typography>{description}</Typography>
-            </Box>
+              <Typography textAlign={'justify'}>{description}</Typography>
+            </Box> */}
             <Divider />
 
             {/* <Typography sx={{ fontSize: '0.8rem' }} color="text.secondary">
@@ -84,9 +100,9 @@ export const TipInFavorites = ({ tip }) => {
             </Typography> */}
             <Box display={'flex'} justifyContent={'space-between'}>
               <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
+                {/* <IconButton aria-label="add to favorites">
                   <FavoriteIcon />
-                </IconButton>
+                </IconButton> */}
                 <IconButton aria-label="share" onClick={share}>
                   <ShareIcon />
                 </IconButton>

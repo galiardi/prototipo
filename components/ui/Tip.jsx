@@ -30,9 +30,9 @@ const pages = {
 
 const db = firebase.firestore();
 
-export const Tip = ({ tip, isFavorite }) => {
+export const Tip = ({ tip, isFavorite, categoryLink }) => {
   const { title, description, category, id, date } = tip;
-  const { showCopyToast } = useContext(UIContext);
+  const { showCopyToast, showSigninModal } = useContext(UIContext);
   const { user } = useAuth();
   const { favorites } = useContext(FavoritesContext);
   const share = () => {
@@ -47,6 +47,10 @@ export const Tip = ({ tip, isFavorite }) => {
   };
 
   const changeFavoriteStatus = () => {
+    if (!user) {
+      showSigninModal(true);
+      return;
+    }
     const newFavorites = [...favorites];
     console.log(favorites);
     console.log(newFavorites);
@@ -80,18 +84,16 @@ export const Tip = ({ tip, isFavorite }) => {
                 aria-controls="panel2-content"
                 id="panel2-header"
               >
-                <Typography sx={{ fontWeight: 'bold' }}>{title}</Typography>
+                <Typography sx={{ fontWeight: 'bold', textAlign: 'justify' }}>
+                  {title}
+                </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>{description}</Typography>
+                <Typography textAlign={'justify'}>{description}</Typography>
               </AccordionDetails>
               <AccordionSummary></AccordionSummary>
             </Accordion>
-            {/* <Typography sx={{ fontWeight: 'bold' }}>{title}</Typography>
-            <Divider />
-            <Box sx={{ paddingY: '0.5rem' }}>
-              <Typography>{description}</Typography>
-            </Box> */}
+
             <Divider />
 
             <Box display={'flex'} justifyContent={'space-between'}>
@@ -100,21 +102,38 @@ export const Tip = ({ tip, isFavorite }) => {
                   aria-label="add to favorites"
                   onClick={changeFavoriteStatus}
                 >
-                  {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                  {isFavorite ? (
+                    <FavoriteIcon fontSize="small" />
+                  ) : (
+                    <FavoriteBorderIcon fontSize="small" />
+                  )}
                 </IconButton>
                 <IconButton aria-label="share" onClick={share}>
-                  <ShareIcon />
+                  <ShareIcon fontSize="small" />
                 </IconButton>
               </CardActions>
               <CardActions>
-                <Link href={`/${pages[category]}`}>
-                  <Typography
-                    sx={{ fontSize: '0.8rem' }}
-                    color="text.secondary"
-                  >
-                    Ver mas tips de {category}
-                  </Typography>
-                </Link>
+                {categoryLink ? (
+                  <>
+                    <Link href={`/${pages[category]}`}>
+                      <Typography
+                        sx={{ fontSize: '0.8rem' }}
+                        color="text.secondary"
+                      >
+                        Ver mas tips de {category}
+                      </Typography>
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Typography
+                      sx={{ fontSize: '0.8rem' }}
+                      color="text.secondary"
+                    >
+                      categoría: {category}
+                    </Typography>
+                  </>
+                )}
               </CardActions>
             </Box>
           </Grid>

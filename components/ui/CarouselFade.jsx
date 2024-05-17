@@ -6,25 +6,25 @@ const elements = [
   {
     id: '1',
     title: 'Ahorro',
-    imgUrl: '/carrousel/ahorro.jpeg',
+    imgUrl: '/images/ahorro.jpeg',
     url: '/ahorro',
   },
   {
     id: '2',
     title: 'Inversión',
-    imgUrl: '/carrousel/inversion2.webp',
+    imgUrl: '/images/inversion2.webp',
     url: '/inversion',
   },
   {
     id: '3',
     title: 'Vivienda',
-    imgUrl: '/carrousel/vivienda.jpg',
+    imgUrl: '/images/vivienda.jpg',
     url: '/vivienda',
   },
   {
     id: '4',
     title: 'Previsión',
-    imgUrl: '/carrousel/prevision.jpg',
+    imgUrl: '/images/prevision.jpg',
     url: '/prevision',
   },
 ];

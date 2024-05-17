@@ -35,7 +35,9 @@ export const SigninModal = () => {
             justifyContent: 'center',
           }}
         >
-          <Typography>Para comprar debes iniciar sesión</Typography>
+          <Typography textAlign={'center'}>
+            Para guardar y ver tus tips favoritos debes iniciar sesión
+          </Typography>
         </Box>
         <Logger showModal={showSigninModal} />
       </Box>

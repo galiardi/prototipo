@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import {
   Box,
   List,
@@ -13,15 +14,17 @@ import {
 } from '@mui/material';
 
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
-import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPiggyBank, faSackDollar } from '@fortawesome/free-solid-svg-icons';
-import { faMoneyBillTrendUp } from '@fortawesome/free-solid-svg-icons';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
-import { faPersonCane } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSackDollar,
+  faMoneyBillTrendUp,
+  faHouse,
+  faPersonCane,
+} from '@fortawesome/free-solid-svg-icons';
 
 import { UIContext } from '../../context/ui';
 import { useAuth } from '../../context/auth';
@@ -36,17 +39,12 @@ type item = {
 const pages: item[] = [
   {
     text: 'Simulador',
-    icon: <BarChart />,
+    icon: <BarChart fontSize="small" />,
     url: '/simulador',
   },
   {
-    text: 'Mis tips favoritos',
-    icon: <CheckBoxOutlinedIcon />,
-    url: '/mis-tips-favoritos',
-  },
-  {
     text: 'Inicio',
-    icon: <HomeOutlinedIcon />,
+    icon: <HomeOutlinedIcon fontSize="small" />,
     url: '/',
   },
 ];
@@ -76,19 +74,30 @@ const categories: item[] = [
 
 export const Sidebar = () => {
   const { user, signout } = useAuth();
-  const { sidemenuOpen, closeSidemenu, openSidemenu } = useContext(UIContext);
-  // const iOS =
-  //   typeof navigator !== "undefined" &&
-  //   /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const { sidemenuOpen, closeSidemenu, openSidemenu, showSigninModal } =
+    useContext(UIContext);
+  const router = useRouter();
 
+  const iOS =
+    typeof navigator !== 'undefined' &&
+    /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+  const onMyFavoriteTips = () => {
+    closeSidemenu();
+    if (user) {
+      router.push('/mis-tips-favoritos');
+    } else {
+      showSigninModal(true);
+    }
+  };
   return (
     <SwipeableDrawer
       anchor="left"
       open={sidemenuOpen}
       onClose={closeSidemenu}
       onOpen={openSidemenu}
-      // disableBackdropTransition={!iOS}
-      // disableDiscovery={iOS}
+      disableBackdropTransition={!iOS}
+      disableDiscovery={iOS}
     >
       <Box sx={{ width: 250 }}>
         <Box sx={{ display: 'flex', justifyContent: 'end' }}>
@@ -120,7 +129,12 @@ export const Sidebar = () => {
           <br />
           <Divider />
           <br />
-
+          <ListItem onClick={onMyFavoriteTips}>
+            <ListItemIcon>
+              <FavoriteIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary={'Mis tips favoritos'} />
+          </ListItem>
           {pages.map((page, index) => {
             return (
               <Link href={page.url} key={index}>
@@ -140,7 +154,7 @@ export const Sidebar = () => {
                 }}
               >
                 <ListItemIcon>
-                  <LogoutOutlinedIcon />
+                  <LogoutOutlinedIcon fontSize="small" />
                 </ListItemIcon>
                 <ListItemText primary="Cerrar sesión" />
               </ListItem>
