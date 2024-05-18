@@ -36,11 +36,15 @@ export const TipInFavorites = ({ tip }) => {
   const { favorites } = useContext(FavoritesContext);
 
   const share = () => {
-    const { href } = new URL(location.href);
     if (navigator.share) {
-      navigator.share({ url: href });
+      navigator.share({
+        url: `https://ftips.vercel.app/tips/${tip.id}`,
+        title: tip.title,
+      });
     } else {
-      navigator.clipboard.writeText(window.location.href);
+      navigator.clipboard.writeText(
+        `${tip.title}\nhttps://ftips.vercel.app/tips/${tip.id}`
+      );
       showCopyToast(true);
     }
   };
@@ -88,21 +92,11 @@ export const TipInFavorites = ({ tip }) => {
               </AccordionDetails>
               <AccordionSummary></AccordionSummary>
             </Accordion>
-            {/* <Typography sx={{ fontWeight: 'bold' }}>{title}</Typography>
-            <Divider />
-            <Box sx={{ paddingY: '0.5rem' }}>
-              <Typography textAlign={'justify'}>{description}</Typography>
-            </Box> */}
+
             <Divider />
 
-            {/* <Typography sx={{ fontSize: '0.8rem' }} color="text.secondary">
-              categoría: {category}
-            </Typography> */}
             <Box display={'flex'} justifyContent={'space-between'}>
               <CardActions disableSpacing>
-                {/* <IconButton aria-label="add to favorites">
-                  <FavoriteIcon />
-                </IconButton> */}
                 <IconButton aria-label="share" onClick={share}>
                   <ShareIcon />
                 </IconButton>

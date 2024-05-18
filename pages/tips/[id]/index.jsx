@@ -36,11 +36,15 @@ export default function TipPage() {
   const { favorites } = useContext(FavoritesContext);
 
   const share = () => {
-    const { href } = new URL(location.href);
     if (navigator.share) {
-      navigator.share({ url: href });
+      navigator.share({
+        url: `https://ftips.vercel.app/tips/${tip.id}`,
+        title: tip.title,
+      });
     } else {
-      navigator.clipboard.writeText(window.location.href);
+      navigator.clipboard.writeText(
+        `${tip.title}\nhttps://ftips.vercel.app/tips/${tip.id}`
+      );
       showCopyToast(true);
     }
   };

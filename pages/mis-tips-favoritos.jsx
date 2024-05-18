@@ -3,7 +3,6 @@ import { Box, Typography, Grid } from '@mui/material';
 import { Layout } from '../components/layouts';
 import { TipInFavorites } from '../components/ui';
 import { TipsContext } from '../context/tips';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import { FavoritesContext } from '../context/favorites';
 
 const MisTipsFavoritos = () => {

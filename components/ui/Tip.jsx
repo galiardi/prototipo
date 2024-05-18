@@ -39,9 +39,12 @@ export const Tip = ({ tip, isFavorite, categoryLink }) => {
     if (navigator.share) {
       navigator.share({
         url: `https://ftips.vercel.app/tips/${tip.id}`,
+        title: tip.title,
       });
     } else {
-      navigator.clipboard.writeText(`https://ftips.vercel.app/tips/${tip.id}`);
+      navigator.clipboard.writeText(
+        `${tip.title}\nhttps://ftips.vercel.app/tips/${tip.id}`
+      );
       showCopyToast(true);
     }
   };
