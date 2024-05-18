@@ -14,7 +14,6 @@ import {
 } from '@mui/material';
 
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
@@ -24,11 +23,13 @@ import {
   faMoneyBillTrendUp,
   faHouse,
   faPersonCane,
+  faHeart,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { UIContext } from '../../context/ui';
 import { useAuth } from '../../context/auth';
-import { BarChart } from '@mui/icons-material';
+
+import { BarChart, CastForEducation, PieChart } from '@mui/icons-material';
 
 type item = {
   text: string;
@@ -37,6 +38,16 @@ type item = {
 };
 
 const pages: item[] = [
+  {
+    text: 'Webinar',
+    icon: <CastForEducation fontSize="small" />,
+    url: '/webinar',
+  },
+  {
+    text: 'Gestión de gastos',
+    icon: <PieChart fontSize="small" />,
+    url: '/gestion-de-gastos',
+  },
   {
     text: 'Simulador',
     icon: <BarChart fontSize="small" />,
@@ -117,24 +128,6 @@ export const Sidebar = () => {
         </Box>
         <Divider />
         <List>
-          <br />
-          {categories.map((category, index) => (
-            <Link href={category.url} key={index}>
-              <ListItem onClick={closeSidemenu}>
-                <ListItemIcon>{category.icon}</ListItemIcon>
-                <ListItemText primary={category.text} />
-              </ListItem>
-            </Link>
-          ))}
-          <br />
-          <Divider />
-          <br />
-          <ListItem onClick={onMyFavoriteTips}>
-            <ListItemIcon>
-              <FavoriteIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText primary={'Mis tips favoritos'} />
-          </ListItem>
           {pages.map((page, index) => {
             return (
               <Link href={page.url} key={index}>
@@ -145,6 +138,32 @@ export const Sidebar = () => {
               </Link>
             );
           })}
+          <Divider />
+          <br />
+          <ListItem>
+            <ListItemText>TIPS</ListItemText>
+          </ListItem>
+          {categories.map((category, index) => (
+            <Link href={category.url} key={index}>
+              <ListItem onClick={closeSidemenu}>
+                <ListItemIcon>{category.icon}</ListItemIcon>
+                <ListItemText primary={category.text} />
+              </ListItem>
+            </Link>
+          ))}
+          <ListItem onClick={onMyFavoriteTips}>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={faHeart} />
+            </ListItemIcon>
+            <Typography
+            // fontWeight={'bold'}
+            >
+              Mis tips favoritos
+            </Typography>
+          </ListItem>
+          <br />
+          <Divider />
+          <br />
           {user && (
             <>
               <ListItem
