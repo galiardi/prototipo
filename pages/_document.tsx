@@ -29,7 +29,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           ></link>
           <link rel="manifest" href="/manifest.json" />
-          <meta name="description" content="Tips financieros" key="desc" />
+          {/* <meta name="description" content="Tips financieros" key="desc" /> */}
           <meta name="image" content="/billtrendup.svg" key="image" />
         </Head>
         <body>

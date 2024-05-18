@@ -9,14 +9,9 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 
-import { CopyToast } from '../../../components/ui';
 import { Layout } from '../../../components/layouts';
-import { Svg } from '../../../components/ui';
-import { relative } from 'path';
-import { FavoritesContext } from '../../../context/favorites';
-import { TipsContext } from '../../../context/tips';
 import { UIContext } from '../../../context/ui';
-import { useAuth } from '../../../context/auth';
+import { TipsContext } from '../../../context/tips';
 
 const pages = {
   ahorro: 'ahorro',
@@ -32,8 +27,6 @@ export default function TipPage() {
   const { [id]: tip = {} } = useContext(TipsContext);
   const { title, description, category, date } = tip;
   const { showCopyToast } = useContext(UIContext);
-  const { user } = useAuth();
-  const { favorites } = useContext(FavoritesContext);
 
   const share = () => {
     if (navigator.share) {
@@ -51,12 +44,7 @@ export default function TipPage() {
   return (
     <>
       <Head>
-        <meta property="og:title" content={tip.title} />
-        <meta
-          property="og:url"
-          content={`https://ftips.vercel.app/tips/${id}`}
-        />
-        <meta property="og:image" content={'/billtrendup.svg'} />
+        <meta name="description" content={tip.title} key="desc" />
       </Head>
       <Layout>
         <Box sx={{ width: '90%' }}>
@@ -83,9 +71,6 @@ export default function TipPage() {
                     </Box>
                     <Divider />
 
-                    {/* <Typography sx={{ fontSize: '0.8rem' }} color="text.secondary">
-              categoría: {category}
-            </Typography> */}
                     <Box display={'flex'} justifyContent={'space-between'}>
                       <CardActions disableSpacing>
                         <IconButton aria-label="add to favorites">
