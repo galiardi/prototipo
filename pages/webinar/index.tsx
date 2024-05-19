@@ -27,15 +27,18 @@ const Webinar = () => {
             <Tab eventKey="home" title="Próximas reuniones">
               Por el momento no se han registrado reuniones.
             </Tab>
-            <Tab eventKey="profile" title="Grabaciones en la nube"></Tab>
+            <Tab eventKey="profile" title="Grabaciones en la nube">
+              Por el momento no existen grabaciones.
+            </Tab>
             <Tab eventKey="contact" title="Contacto">
-              Contáctanos por WhatsApp al{' '}
+              Contáctanos a nuestro{' '}
               <Link
                 href={`https://wa.me/56953295712/?text=Hola,%20escribo%20desde%20https://ftips.vercel.app%`}
                 className="text-primary"
               >
-                +56953295712
+                WhatsApp
               </Link>
+              .
             </Tab>
           </Tabs>
         </Box>
