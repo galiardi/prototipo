@@ -1,12 +1,14 @@
 export default async function handler(req, res) {
   try {
+    // IPC histórico variación anual
     const historicalIPCresponse = await fetch(
-      `https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?user=${process.env.BANCO_CENTRAL_USER}&pass=${process.env.BANCO_CENTRAL_PASSWORD}&timeseries=G073.IPC.IND.2018.M`
+      `https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?user=${process.env.BANCO_CENTRAL_USER}&pass=${process.env.BANCO_CENTRAL_PASSWORD}&timeseries=G073.IPC.V12.2018.M`
     );
     const { Series: historicalIPC } = await historicalIPCresponse.json();
 
+    // IPC general variación anual
     const generalIPCresponse = await fetch(
-      `https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?user=${process.env.BANCO_CENTRAL_USER}&pass=${process.env.BANCO_CENTRAL_PASSWORD}&timeseries=G073.IPC.IND.2018.M`
+      `https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?user=${process.env.BANCO_CENTRAL_USER}&pass=${process.env.BANCO_CENTRAL_PASSWORD}&timeseries=G073.IPC.V12.2023.M`
     );
     const { Series: generalIPC } = await generalIPCresponse.json();
 
