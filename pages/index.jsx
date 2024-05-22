@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 
 import { Logger, MainCarousel, Tip } from '../components/ui';
@@ -15,7 +15,7 @@ const Home = () => {
   const getTime = async () => {
     const response = await fetch('/api/cron');
     const data = await response.json();
-    setTime(data);
+    setTime(data.datetime);
   };
   console.log(time);
 
