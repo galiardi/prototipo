@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 
 import { Logger, MainCarousel, Tip } from '../components/ui';
@@ -11,16 +11,6 @@ const Home = () => {
   const { user } = useAuth();
   const { tips } = useContext(TipsContext);
   const { favorites } = useContext(FavoritesContext);
-  const [time, setTime] = useState('loading...');
-  const getTime = async () => {
-    const response = await fetch('/api/cron');
-    const data = await response.json();
-    setTime(data.datetime);
-  };
-
-  useEffect(() => {
-    getTime();
-  }, []);
 
   return (
     <Layout>
@@ -32,8 +22,6 @@ const Home = () => {
       )}
       <MainCarousel />
       <Box display="flex" justifyContent="center">
-        <Typography>{time}</Typography>
-
         <Typography
           sx={{
             margin: '2rem',
