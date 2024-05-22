@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 
 import { Logger, MainCarousel, Tip } from '../components/ui';
@@ -11,6 +11,16 @@ const Home = () => {
   const { user } = useAuth();
   const { tips } = useContext(TipsContext);
   const { favorites } = useContext(FavoritesContext);
+
+  const getTime = async () => {
+    const response = await fetch('/api/cron');
+    const data = await response.json();
+    console.log(data);
+  };
+
+  useEffect(() => {
+    getTime();
+  }, []);
 
   return (
     <Layout>

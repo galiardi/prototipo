@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { Alternative } from './Alternative';
+import { useGetAverageAnnualInflation } from '../../../functions';
 
 export const Form = ({ formName }) => {
+  const averageAnnualInflationRate =
+    Math.round(Number(useGetAverageAnnualInflation() * 100)) / 100 ||
+    'cargando...';
   const [formData, setFormData] = useState({
     name: formName,
     initialCapital: 0,
     annualContribution: 0,
     years: 0,
-    annualInflationRatenterestRate: 0,
-    annualInflationRate: 0,
+    interestRate: 0,
   });
-
+  console.log(useGetAverageAnnualInflation());
   const onInputChange = (e) => {
     const { name, value } = e.target;
     const newFormData = { ...formData, [name]: value };
@@ -59,9 +62,9 @@ export const Form = ({ formName }) => {
             <div className="inputDiv">
               <p>Tasa de inflación anual</p>
               <input
-                type="number"
-                name="annualInflationRate"
-                value={formData.annualInflationRate}
+                type="text"
+                name="averageAnnualInflationRate"
+                value={`${averageAnnualInflationRate}*`}
                 onChange={onInputChange}
               />
             </div>

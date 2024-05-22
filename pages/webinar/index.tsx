@@ -20,7 +20,7 @@ const Webinar = () => {
         </Box>
         <Box sx={{ paddingTop: '1rem' }}>
           <Tabs
-            defaultActiveKey="profile"
+            defaultActiveKey="home"
             id="uncontrolled-tab-example"
             className="mb-3"
           >
@@ -33,7 +33,7 @@ const Webinar = () => {
             <Tab eventKey="contact" title="Contacto">
               Contáctanos a nuestro{' '}
               <Link
-                href={`https://wa.me/56953295712/?text=Hola,%20escribo%20desde%20https://ftips.vercel.app%`}
+                href={`https://wa.me/56953295712/?text=Hola,%20escribo%20desde%20https://ftips.vercel.app`}
                 className="text-primary"
               >
                 WhatsApp
