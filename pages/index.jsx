@@ -17,7 +17,6 @@ const Home = () => {
     const data = await response.json();
     setTime(data.datetime);
   };
-  console.log(time);
 
   useEffect(() => {
     getTime();
@@ -33,6 +32,8 @@ const Home = () => {
       )}
       <MainCarousel />
       <Box display="flex" justifyContent="center">
+        <Typography>{time}</Typography>
+
         <Typography
           sx={{
             margin: '2rem',
