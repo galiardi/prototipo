@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
 import { Box } from '@mui/material';
 
-export const Alternative = ({ formName, borderColor }) => {
-  const [formData, setFormData] = useState({
-    formName: '',
-    annualInterestRatenterestRate: 0,
-  });
-
-  const onInputChange = (e) => {
-    const { name, value } = e.target;
-    const newFormData = { ...formData, [name]: value };
-    setFormData(newFormData);
-  };
-
+export const Alternative = ({
+  inputName,
+  alternativeName,
+  annualInterestRate,
+  borderColor,
+  onInputChange,
+}) => {
   return (
     <>
       <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
@@ -22,8 +16,8 @@ export const Alternative = ({ formName, borderColor }) => {
               <p>Nombre</p>
               <input
                 type="text"
-                name="name"
-                value={formData.formName}
+                name={inputName + 'Name'}
+                value={alternativeName}
                 maxLength={25}
                 onChange={onInputChange}
               />
@@ -32,11 +26,11 @@ export const Alternative = ({ formName, borderColor }) => {
 
           <div>
             <div className="inputDiv">
-              <p>Tasa de interés anual</p>
+              <p>Tasa de interés anual (%)</p>
               <input
                 type="number"
-                name="annualInterestRate"
-                value={formData.annualInterestRate}
+                name={inputName + 'Rate'}
+                value={annualInterestRate}
                 onChange={onInputChange}
               />
             </div>

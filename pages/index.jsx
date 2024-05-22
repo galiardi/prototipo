@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 
 import { Logger, MainCarousel, Tip } from '../components/ui';

@@ -3,22 +3,46 @@ import { Box, Button, Typography } from '@mui/material';
 import { Alternative } from './Alternative';
 import { useGetAverageAnnualInflation } from '../../../functions';
 
-export const Form = ({ formName }) => {
+export const Form = () => {
   const averageAnnualInflationRate =
     Math.round(Number(useGetAverageAnnualInflation() * 100)) / 100 ||
     'cargando...';
+
   const [formData, setFormData] = useState({
-    name: formName,
-    initialCapital: 0,
-    annualContribution: 0,
-    years: 0,
-    interestRate: 0,
+    initialCapital: '',
+    annualContribution: '',
+    years: '',
+    alternative1Name: 'Alternativa 1',
+    alternative2Name: 'Alternativa 2',
+    alternative1Rate: '',
+    alternative2Rate: '',
   });
-  console.log(useGetAverageAnnualInflation());
+
   const onInputChange = (e) => {
     const { name, value } = e.target;
     const newFormData = { ...formData, [name]: value };
     setFormData(newFormData);
+  };
+
+  const calculate = () => {
+    const {
+      initialCapital,
+      annualContribution,
+      years,
+      interestRate,
+      alternative1Rate,
+      alternative2Rate,
+    } = Object.keys(formData).reduce(
+      (acc, el) => ({ ...acc, [el]: Number(formData[el]) }),
+      {}
+    );
+    const totalContribution = initialCapital + annualContribution * years;
+    const balance =
+      initialCapital * Math.pow(1 + alternative1Rate / 100, years) +
+      (annualContribution * Math.pow(1 + alternative1Rate / 100, years) - 1) /
+        (alternative1Rate / 100);
+    console.log(totalContribution);
+    console.log(balance);
   };
 
   return (
@@ -30,7 +54,7 @@ export const Form = ({ formName }) => {
               <p>Capital inicial</p>
               <input
                 type="number"
-                name="initial-capital"
+                name="initialCapital"
                 value={formData.initialCapital}
                 onChange={onInputChange}
               />
@@ -41,7 +65,7 @@ export const Form = ({ formName }) => {
               <p>Aporte anual</p>
               <input
                 type="number"
-                name="annual-Contribution"
+                name="annualContribution"
                 value={formData.annualContribution}
                 onChange={onInputChange}
               />
@@ -60,7 +84,7 @@ export const Form = ({ formName }) => {
           </div>
           <div>
             <div className="inputDiv">
-              <p>Tasa de inflación anual</p>
+              <p>Tasa de inflación anual (%)</p>
               <input
                 type="text"
                 name="averageAnnualInflationRate"
@@ -69,15 +93,27 @@ export const Form = ({ formName }) => {
               />
             </div>
           </div>
-          <Alternative borderColor={'rgba(255, 99, 132, 0.5)'} />
-          <Alternative borderColor={'rgba(53, 162, 235, 0.5)'} />
+          <Alternative
+            inputName={'alternative1'}
+            alternativeName={formData.alternative1Name}
+            annualInterestRate={formData.alternative1Rate}
+            borderColor={'rgba(255, 99, 132, 0.5)'}
+            onInputChange={onInputChange}
+          />
+          <Alternative
+            inputName={'alternative2'}
+            alternativeName={formData.alternative2Name}
+            annualInterestRate={formData.alternative2Rate}
+            borderColor={'rgba(53, 162, 235, 0.5)'}
+            onInputChange={onInputChange}
+          />
         </form>
         <Typography sx={{ fontSize: '0.7rem' }}>
           *Promedio de la variación anual del IPC de los últimos 25 años
           contados desde el mes actual.
         </Typography>
         <Box sx={{ padding: '2rem' }}>
-          <Button variant={'outlined'} color={'secondary'}>
+          <Button variant={'outlined'} color={'secondary'} onClick={calculate}>
             Calcular
           </Button>
         </Box>

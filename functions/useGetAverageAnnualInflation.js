@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import firebase from '../firebase/client';
 
 export const useGetAverageAnnualInflation = () => {
   // const [historicalIPC, setHistoricalIPC] = useState([]);
@@ -9,18 +10,24 @@ export const useGetAverageAnnualInflation = () => {
       const { data, error } = await getEconomicIndicators();
       if (error) return console.log(error);
       // setHistoricalIPC(data.historicalIPC.Obs);
-      setGeneralIPC(data.generalIPC.Obs);
+      setGeneralIPC(data.Obs);
     })();
   }, []);
 
   const getEconomicIndicators = async () => {
+    const db = firebase.firestore();
     try {
-      const response = await fetch('/api/economic-indicators');
-      const { data, error } = await response.json();
-      return { data, error };
+      const response = await db
+        .collection('economic-indicators')
+        .doc('generalIPCSerie')
+        .get();
+
+      const data = response.data();
+
+      return { data, error: null };
     } catch (e) {
       console.log(e);
-      return;
+      return { data: null, error: e };
     }
   };
 
