@@ -1,3 +1,4 @@
 export * from './productUploader';
 export * from './isFormValid';
-export * from './useGetAverageAnnualInflation';
+export * from './getBalance';
+export * from './getPresentValue';

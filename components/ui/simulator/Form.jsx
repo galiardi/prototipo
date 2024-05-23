@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { Alternative } from './Alternative';
-import { useGetAverageAnnualInflation } from '../../../functions';
+import { useGetAverageAnnualInflation } from '../../../hooks';
+import { getBalance, getPresentValue } from '../../../functions';
 
 export const Form = () => {
-  const averageAnnualInflationRate =
+  const inflationRate =
     Math.round(Number(useGetAverageAnnualInflation() * 100)) / 100 ||
     'cargando...';
 
@@ -29,20 +30,37 @@ export const Form = () => {
       initialCapital,
       annualContribution,
       years,
-      interestRate,
       alternative1Rate,
       alternative2Rate,
     } = Object.keys(formData).reduce(
       (acc, el) => ({ ...acc, [el]: Number(formData[el]) }),
       {}
     );
+
     const totalContribution = initialCapital + annualContribution * years;
-    const balance =
-      initialCapital * Math.pow(1 + alternative1Rate / 100, years) +
-      (annualContribution * Math.pow(1 + alternative1Rate / 100, years) - 1) /
-        (alternative1Rate / 100);
-    console.log(totalContribution);
-    console.log(balance);
+
+    const totalContributionPV = getPresentValue({
+      futureValue: totalContribution,
+      years,
+      inflation: inflationRate,
+    });
+
+    const balance1 = getBalance({
+      initialCapital,
+      annualContribution,
+      years,
+      rate: alternative1Rate,
+    });
+    const balance1PV = getPresentValue({
+      futureValue: balance1,
+      years,
+      inflation: inflationRate,
+    });
+
+    console.log('aporte total: ' + totalContribution);
+    console.log('aporte total en valor presente: ' + totalContributionPV);
+    console.log('balance1: ' + balance1);
+    console.log('balance1 en valor presente: ' + balance1PV);
   };
 
   return (
@@ -87,8 +105,8 @@ export const Form = () => {
               <p>Tasa de inflación anual (%)</p>
               <input
                 type="text"
-                name="averageAnnualInflationRate"
-                value={`${averageAnnualInflationRate}*`}
+                name="inflationRate"
+                value={`${inflationRate}*`}
                 onChange={onInputChange}
               />
             </div>
