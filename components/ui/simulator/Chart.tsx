@@ -1,4 +1,4 @@
-import React from 'react';
+import { useContext } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,6 +9,9 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { FormControlLabel, Box } from '@mui/material';
+import { PresentValueSwitch } from './PresentValueSwitch';
+import { UIContext } from '../../../context/ui';
 
 ChartJS.register(
   CategoryScale,
@@ -39,11 +42,7 @@ export const options = {
   },
 };
 
-const labels = [
-  'Aporte total',
-  'Saldo acumulado',
-  'Saldo ajustado por inflación',
-];
+const labels = ['Aporte total', 'Saldo acumulado'];
 
 export const data = {
   labels,
@@ -64,5 +63,26 @@ export const data = {
 };
 
 export const Chart = () => {
-  return <Bar options={options} data={data} />;
+  const { isPresentValueSwitchChecked, turnPresentValueSwitch } =
+    useContext(UIContext);
+  return (
+    <>
+      <Bar options={options} data={data} />
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <FormControlLabel
+          control={
+            <PresentValueSwitch
+              sx={{ m: 1 }}
+              checked={isPresentValueSwitchChecked}
+              onChange={() => {
+                turnPresentValueSwitch(!isPresentValueSwitchChecked);
+              }}
+              inputProps={{ 'aria-label': 'controlled' }}
+            />
+          }
+          label="Ajustar a valor presente"
+        />
+      </Box>
+    </>
+  );
 };

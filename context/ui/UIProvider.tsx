@@ -13,6 +13,7 @@ export interface UIState {
   copyToastOpen: boolean;
   phoneModalOpen: boolean;
   signinOpen: boolean;
+  isPresentValueSwitchChecked: boolean;
 }
 
 const UI_INITIAL_STATE: UIState = {
@@ -23,6 +24,7 @@ const UI_INITIAL_STATE: UIState = {
   copyToastOpen: false,
   phoneModalOpen: false,
   signinOpen: false,
+  isPresentValueSwitchChecked: false,
 };
 
 export const UIProvider: FC<Props> = ({ children }) => {
@@ -68,6 +70,10 @@ export const UIProvider: FC<Props> = ({ children }) => {
     dispatch({ type: '[UI] - show signin modal', payload: arg });
   };
 
+  const turnPresentValueSwitch = (arg: boolean) => {
+    dispatch({ type: '[UI] - turn present value switch', payload: arg });
+  };
+
   return (
     <UIContext.Provider
       value={{
@@ -82,6 +88,7 @@ export const UIProvider: FC<Props> = ({ children }) => {
         showCopyToast,
         showPhoneModal,
         showSigninModal,
+        turnPresentValueSwitch,
       }}
     >
       {children}
