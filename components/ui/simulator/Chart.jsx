@@ -12,6 +12,7 @@ import { Bar } from 'react-chartjs-2';
 import { FormControlLabel, Box } from '@mui/material';
 import { PresentValueSwitch } from './PresentValueSwitch';
 import { UIContext } from '../../../context/ui';
+import { SimulatorDataContext } from '../../../context/simulatorData';
 
 ChartJS.register(
   CategoryScale,
@@ -21,10 +22,8 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-export const options = {
-  // maintainAspectRatio: false,
-  indexAxis: 'y' as const,
+const options = {
+  indexAxis: 'y',
   elements: {
     bar: {
       borderWidth: 2,
@@ -33,38 +32,60 @@ export const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'bottom' as const,
+      position: 'bottom',
     },
-    // title: {
-    //   display: true,
-    //   text: 'Chart.js Horizontal Bar Chart',
-    // },
+    title: {
+      display: true,
+      text: 'SALDO ACUMULADO',
+    },
   },
 };
-
-const labels = ['Aporte total', 'Saldo acumulado'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: [10, 20, 30],
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: [20, 40, 60],
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
-
 export const Chart = () => {
+  const {
+    totalContribution,
+    totalContributionPV,
+    alternative1,
+    alternative2,
+    alternative1label,
+    alternative2label,
+  } = useContext(SimulatorDataContext);
   const { isPresentValueSwitchChecked, turnPresentValueSwitch } =
     useContext(UIContext);
+
+  const data = {
+    labels: [''],
+    datasets: [
+      {
+        label: 'Aporte total',
+        data: [
+          isPresentValueSwitchChecked ? totalContributionPV : totalContribution,
+        ],
+        borderColor: '#e1e1e1',
+        backgroundColor: '#f1f1f1',
+      },
+      {
+        label: alternative1label,
+        data: [
+          isPresentValueSwitchChecked
+            ? alternative1.balancePV
+            : alternative1.balance,
+        ],
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+      {
+        label: alternative2label,
+        data: [
+          isPresentValueSwitchChecked
+            ? alternative2.balancePV
+            : alternative2.balance,
+        ],
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  };
+
   return (
     <>
       <Bar options={options} data={data} />

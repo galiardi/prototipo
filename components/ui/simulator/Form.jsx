@@ -1,67 +1,28 @@
-import React, { useState } from 'react';
+import { useContext, useEffect, useCallback } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { Alternative } from './Alternative';
-import { useGetAverageAnnualInflation } from '../../../hooks';
-import { getBalance, getPresentValue } from '../../../functions';
+import { SimulatorDataContext } from '../../../context/simulatorData';
 
 export const Form = () => {
-  const inflationRate =
-    Math.round(Number(useGetAverageAnnualInflation() * 100)) / 100 ||
-    'cargando...';
+  const {
+    initialCapital,
+    annualContribution,
+    years,
+    alternative1Name,
+    alternative2Name,
+    alternative1Rate,
+    alternative2Rate,
+    inflationRate,
+    onInputChange,
+    onCalculate,
+    setInflationRate,
+  } = useContext(SimulatorDataContext);
 
-  const [formData, setFormData] = useState({
-    initialCapital: '',
-    annualContribution: '',
-    years: '',
-    alternative1Name: 'Alternativa 1',
-    alternative2Name: 'Alternativa 2',
-    alternative1Rate: '',
-    alternative2Rate: '',
-  });
+  const cachedSetInflationRate = useCallback(setInflationRate, []);
 
-  const onInputChange = (e) => {
-    const { name, value } = e.target;
-    const newFormData = { ...formData, [name]: value };
-    setFormData(newFormData);
-  };
-
-  const calculate = () => {
-    const {
-      initialCapital,
-      annualContribution,
-      years,
-      alternative1Rate,
-      alternative2Rate,
-    } = Object.keys(formData).reduce(
-      (acc, el) => ({ ...acc, [el]: Number(formData[el]) }),
-      {}
-    );
-
-    const totalContribution = initialCapital + annualContribution * years;
-
-    const totalContributionPV = getPresentValue({
-      futureValue: totalContribution,
-      years,
-      inflation: inflationRate,
-    });
-
-    const balance1 = getBalance({
-      initialCapital,
-      annualContribution,
-      years,
-      rate: alternative1Rate,
-    });
-    const balance1PV = getPresentValue({
-      futureValue: balance1,
-      years,
-      inflation: inflationRate,
-    });
-
-    console.log('aporte total: ' + totalContribution);
-    console.log('aporte total en valor presente: ' + totalContributionPV);
-    console.log('balance1: ' + balance1);
-    console.log('balance1 en valor presente: ' + balance1PV);
-  };
+  useEffect(() => {
+    cachedSetInflationRate();
+  }, [cachedSetInflationRate]);
 
   return (
     <>
@@ -73,7 +34,7 @@ export const Form = () => {
               <input
                 type="number"
                 name="initialCapital"
-                value={formData.initialCapital}
+                value={initialCapital}
                 onChange={onInputChange}
               />
             </div>
@@ -84,7 +45,7 @@ export const Form = () => {
               <input
                 type="number"
                 name="annualContribution"
-                value={formData.annualContribution}
+                value={annualContribution}
                 onChange={onInputChange}
               />
             </div>
@@ -95,7 +56,7 @@ export const Form = () => {
               <input
                 type="number"
                 name="years"
-                value={formData.years}
+                value={years}
                 onChange={onInputChange}
               />
             </div>
@@ -113,15 +74,15 @@ export const Form = () => {
           </div>
           <Alternative
             inputName={'alternative1'}
-            alternativeName={formData.alternative1Name}
-            annualInterestRate={formData.alternative1Rate}
+            alternativeName={alternative1Name}
+            annualInterestRate={alternative1Rate}
             borderColor={'rgba(255, 99, 132, 0.5)'}
             onInputChange={onInputChange}
           />
           <Alternative
             inputName={'alternative2'}
-            alternativeName={formData.alternative2Name}
-            annualInterestRate={formData.alternative2Rate}
+            alternativeName={alternative2Name}
+            annualInterestRate={alternative2Rate}
             borderColor={'rgba(53, 162, 235, 0.5)'}
             onInputChange={onInputChange}
           />
@@ -131,7 +92,11 @@ export const Form = () => {
           contados desde el mes actual.
         </Typography>
         <Box sx={{ padding: '2rem' }}>
-          <Button variant={'outlined'} color={'secondary'} onClick={calculate}>
+          <Button
+            variant={'outlined'}
+            color={'secondary'}
+            onClick={onCalculate}
+          >
             Calcular
           </Button>
         </Box>

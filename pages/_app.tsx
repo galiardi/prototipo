@@ -5,6 +5,7 @@ import { AuthProvider } from '../context/auth';
 import { UIProvider } from '../context/ui';
 import { TipsProvider } from '../context/tips';
 import { FavoritesProvider } from '../context/favorites';
+import { SimulatorDataProvider } from '../context/simulatorData';
 
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -18,12 +19,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AuthProvider>
       <FavoritesProvider>
         <UIProvider>
-          <TipsProvider>
-            <ThemeProvider theme={lightTheme}>
-              <CssBaseline />
-              <Component {...pageProps} />
-            </ThemeProvider>
-          </TipsProvider>
+          <SimulatorDataProvider>
+            <TipsProvider>
+              <ThemeProvider theme={lightTheme}>
+                <CssBaseline />
+                <Component {...pageProps} />
+              </ThemeProvider>
+            </TipsProvider>
+          </SimulatorDataProvider>
         </UIProvider>
       </FavoritesProvider>
     </AuthProvider>
