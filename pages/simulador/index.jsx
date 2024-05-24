@@ -11,7 +11,7 @@ const Simulador = () => {
       <Box>
         <Form />
       </Box>
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '100%', height: '50vh', marginBottom: '4rem' }}>
         <Chart />
       </div>
     </Layout>

@@ -4,7 +4,7 @@ export const getBalance = ({
   years,
   rate,
 }) => {
-  if (rate === 0) return 'false';
+  if (rate === 0) return initialCapital + annualContribution * years;
   const r = rate / 100;
   const balance =
     initialCapital * Math.pow(1 + r, years) +

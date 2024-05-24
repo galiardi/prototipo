@@ -39,18 +39,19 @@ const options = {
       text: 'SALDO ACUMULADO',
     },
   },
+  maintainAspectRatio: false,
 };
 export const Chart = () => {
-  const {
-    totalContribution,
-    totalContributionPV,
-    alternative1,
-    alternative2,
-    alternative1label,
-    alternative2label,
-  } = useContext(SimulatorDataContext);
+  const simulatorData = useContext(SimulatorDataContext);
   const { isPresentValueSwitchChecked, turnPresentValueSwitch } =
     useContext(UIContext);
+
+  const totalContributionPV = Math.round(simulatorData.totalContributionPV);
+  const totalContribution = Math.round(simulatorData.totalContribution);
+  const balance1 = Math.round(simulatorData.alternative1.balance);
+  const balance2 = Math.round(simulatorData.alternative2.balance);
+  const balance1PV = Math.round(simulatorData.alternative1.balancePV);
+  const balance2PV = Math.round(simulatorData.alternative2.balancePV);
 
   const data = {
     labels: [''],
@@ -64,22 +65,14 @@ export const Chart = () => {
         backgroundColor: '#f1f1f1',
       },
       {
-        label: alternative1label,
-        data: [
-          isPresentValueSwitchChecked
-            ? alternative1.balancePV
-            : alternative1.balance,
-        ],
+        label: simulatorData.alternative1label,
+        data: [isPresentValueSwitchChecked ? balance1PV : balance1],
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
       {
-        label: alternative2label,
-        data: [
-          isPresentValueSwitchChecked
-            ? alternative2.balancePV
-            : alternative2.balance,
-        ],
+        label: simulatorData.alternative2label,
+        data: [isPresentValueSwitchChecked ? balance2PV : balance2],
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },

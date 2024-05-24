@@ -91,7 +91,7 @@ export const Form = () => {
           *Promedio de la variación anual del IPC de los últimos 25 años
           contados desde el mes actual.
         </Typography>
-        <Box sx={{ padding: '2rem' }}>
+        <Box sx={{ padding: '1.5rem' }}>
           <Button
             variant={'outlined'}
             color={'secondary'}
@@ -110,7 +110,7 @@ export const Form = () => {
             flex-direction: column;
             justify-content: center;
             margin-top: 0.5rem;
-            padding: 0.5rem 2rem 1rem 2rem;
+            padding: 0.5rem 1.5rem 1rem 1.5rem;
             background-color: #fff;
             border: 2px solid #000;
             border-radius: 1rem;
