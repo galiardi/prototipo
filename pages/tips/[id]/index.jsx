@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Box, Grid, Paper, Divider } from '@mui/material';
@@ -11,7 +10,7 @@ import ShareIcon from '@mui/icons-material/Share';
 
 import { Layout } from '../../../components/layouts';
 import { UIContext } from '../../../context/ui';
-import { TipsContext } from '../../../context/tips';
+import firebase from '../../../firebase/client';
 
 const pages = {
   ahorro: 'ahorro',
@@ -20,14 +19,25 @@ const pages = {
   previsión: 'prevision',
 };
 
-export default function TipPage() {
-  const router = useRouter();
-  const id = router.query.id;
+export async function getServerSideProps({ req, res, resolvedUrl }) {
+  const id = resolvedUrl.trim().slice(6);
+  const db = firebase.firestore();
+  const response = await db.collection('tips').doc(id).get();
+  const tip = response.data();
+  return {
+    props: {
+      tip,
+    },
+  };
+}
+
+export default function TipPage({ tip }) {
+  // const router = useRouter();
+  // const id = router.query.id;
   // dynamic import. TipContext expone cada tip individualmente por id
-  const { [id]: tip = {} } = useContext(TipsContext);
+  // const { [id]: tip = {} } = useContext(TipsContext);
   const { title, description, category, date } = tip;
   const { showCopyToast } = useContext(UIContext);
-
   const share = () => {
     if (navigator.share) {
       navigator.share({
