@@ -44,7 +44,23 @@ export default function TipPage() {
   return (
     <>
       <Head>
-        <meta name="description" content={tip.title} key="desc" />
+        <meta property="og:title" content={tip.title} />
+        <meta property="og:description" content={tip.description} />
+        {/* <meta
+          property="og:image"
+          content="https://www.ejemplo.com/imagen.jpg"
+        /> */}
+        {/* <meta property="og:url" content="https://www.ejemplo.com" /> */}
+        <meta property="og:type" content="website" />
+
+        {/* <meta name="twitter:card" content="summary_large_image" /> */}
+        <meta name="twitter:title" content={tip.title} />
+        <meta name="twitter:description" content={tip.description} />
+        {/* <meta
+          name="twitter:image"
+          content="https://www.ejemplo.com/imagen.jpg"
+        />
+        <meta name="twitter:url" content="https://www.ejemplo.com" /> */}
       </Head>
       <Layout>
         <Box sx={{ width: '90%' }}>

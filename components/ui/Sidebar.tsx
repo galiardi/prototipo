@@ -43,11 +43,11 @@ const pages: item[] = [
     icon: <CastForEducation fontSize="small" />,
     url: '/webinar',
   },
-  {
-    text: 'Gestión de gastos',
-    icon: <PieChart fontSize="small" />,
-    url: '/gestion-de-gastos',
-  },
+  // {
+  //   text: 'Gestión de gastos',
+  //   icon: <PieChart fontSize="small" />,
+  //   url: '/gestion-de-gastos',
+  // },
   {
     text: 'Simulador',
     icon: <BarChart fontSize="small" />,

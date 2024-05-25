@@ -8,7 +8,9 @@ import { FavoritesContext } from '../context/favorites';
 
 const Inversion = () => {
   const { tips } = useContext(TipsContext);
+  console.log(tips);
   const tipsFiltered = tips.filter((tip) => tip.category === 'inversion');
+  console.log(tipsFiltered);
   const { favorites } = useContext(FavoritesContext);
 
   return (

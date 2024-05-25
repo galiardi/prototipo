@@ -59,9 +59,9 @@ export const Uploader = () => {
                 onChange={onInputChange}
               >
                 <MenuItem value={'ahorro'}>ahorro</MenuItem>
-                <MenuItem value={'inversión'}>inversión</MenuItem>
+                <MenuItem value={'inversion'}>inversión</MenuItem>
                 <MenuItem value={'vivienda'}>vivienda</MenuItem>
-                <MenuItem value={'previsión'}>previsión</MenuItem>
+                <MenuItem value={'prevision'}>previsión</MenuItem>
               </Select>
             </FormControl>
             <p className={errorObj.category ? 'error' : 'notError'}>

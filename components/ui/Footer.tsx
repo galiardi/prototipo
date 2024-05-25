@@ -21,7 +21,7 @@ export const Footer = () => {
       <BottomNavigation>
         <BottomNavigationAction
           LinkComponent={Link}
-          href={`https://wa.me/56953295712/?text=Hola,%20escribo%20desde%20https://ftips.vercel.app%para%sugerir`}
+          href={`https://wa.me/56953295712/?text=Hola,%20escribo%20desde%20https://ftips.vercel.app%20para%20sugerir%20`}
           icon={<WhatsAppIcon />}
         />
       </BottomNavigation>
