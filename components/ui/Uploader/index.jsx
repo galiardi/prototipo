@@ -16,12 +16,14 @@ export const Uploader = () => {
     category: '',
     title: '',
     description: '',
+    author: '',
   });
 
   const [errorObj, setErrorObj] = useState({
     category: false,
     title: false,
     description: false,
+    author: false,
   });
 
   const [loading, setLoading] = useState(false);
@@ -98,6 +100,21 @@ export const Uploader = () => {
             </div>
             <p className={errorObj.category ? 'error' : 'notError'}>
               Descripción requerida
+            </p>
+          </div>
+          <div>
+            <div className="inputDiv">
+              <input
+                type="text"
+                name="author"
+                value={formData.author}
+                maxLength={50}
+                onChange={onInputChange}
+                placeholder={'Autor'}
+              />
+            </div>
+            <p className={errorObj.author ? 'error' : 'notError'}>
+              Título requerido
             </p>
           </div>
         </form>

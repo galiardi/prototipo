@@ -7,15 +7,28 @@ export const TipsProvider = ({ children }) => {
   const db = firebase.firestore();
 
   useEffect(() => {
-    const unsubscribe = db.collection('tips').onSnapshot((querySnapshot) => {
-      const temp = [];
-      querySnapshot.forEach((doc) => {
-        const id = doc.id;
-        const data = doc.data();
-        temp.push({ id, ...data });
+    const unsubscribe = db
+      .collection('tips')
+      .orderBy('date', 'desc')
+      .onSnapshot((querySnapshot) => {
+        const temp = [];
+        querySnapshot.forEach((doc) => {
+          const id = doc.id;
+          const data = doc.data();
+          temp.push({ id, ...data });
+        });
+        let luisTips = [];
+        let vulgarTips = [];
+        temp.forEach((tip) => {
+          if (tip.author === 'Luis') {
+            luisTips.push(tip);
+          } else {
+            vulgarTips.push(tip);
+          }
+        });
+        const sortedTips = [...luisTips, ...vulgarTips];
+        setState({ tips: sortedTips });
       });
-      setState({ tips: temp });
-    });
 
     return () => {
       unsubscribe();

@@ -13,6 +13,10 @@ export const isFormValid = (formData, setErrorObj) => {
     errors.description = true;
   }
 
+  if (!formData.author) {
+    errors.description = true;
+  }
+
   if (Object.values(errors).includes(true)) {
     setErrorObj(errors);
     return false;
