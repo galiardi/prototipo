@@ -1,4 +1,4 @@
-import firebase from '../firebase/client';
+import firebase from '../../firebase/client';
 
 export const getGeneralIpcSerie = async () => {
   const db = firebase.firestore();

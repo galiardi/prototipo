@@ -43,8 +43,11 @@ const options = {
 };
 export const Chart = () => {
   const simulatorData = useContext(SimulatorDataContext);
-  const { isPresentValueSwitchChecked, turnPresentValueSwitch } =
-    useContext(UIContext);
+  const {
+    isPresentValueSwitchChecked,
+    turnPresentValueSwitch,
+    isAdjustContributionsChecked,
+  } = useContext(UIContext);
 
   const totalContributionPV = Math.round(simulatorData.totalContributionPV);
   const totalContribution = Math.round(simulatorData.totalContribution);
@@ -68,7 +71,7 @@ export const Chart = () => {
   const totalContributionWACPV = Math.round(
     simulatorData.totalContributionWACPV
   );
-  console.table(simulatorData);
+  // console.table(simulatorData);
 
   const data = {
     labels: [''],
@@ -96,9 +99,41 @@ export const Chart = () => {
     ],
   };
 
+  // data with adjusted contributions
+  const dataWAC = {
+    labels: [''],
+    datasets: [
+      {
+        label: 'Aporte total',
+        data: [
+          isPresentValueSwitchChecked
+            ? totalContributionWACPV
+            : totalContributionWAC,
+        ],
+        borderColor: '#e1e1e1',
+        backgroundColor: '#f1f1f1',
+      },
+      {
+        label: simulatorData.alternative1label,
+        data: [isPresentValueSwitchChecked ? balance1WACPV : balance1WAC],
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+      {
+        label: simulatorData.alternative2label,
+        data: [isPresentValueSwitchChecked ? balance2WACPV : balance2WAC],
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  };
+
   return (
     <>
-      <Bar options={options} data={data} />
+      <Bar
+        options={options}
+        data={isAdjustContributionsChecked ? dataWAC : data}
+      />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <FormControlLabel
           control={

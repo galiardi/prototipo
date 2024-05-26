@@ -14,6 +14,7 @@ export interface UIState {
   phoneModalOpen: boolean;
   signinOpen: boolean;
   isPresentValueSwitchChecked: boolean;
+  isAdjustContributionsChecked: boolean;
 }
 
 const UI_INITIAL_STATE: UIState = {
@@ -25,6 +26,7 @@ const UI_INITIAL_STATE: UIState = {
   phoneModalOpen: false,
   signinOpen: false,
   isPresentValueSwitchChecked: false,
+  isAdjustContributionsChecked: false,
 };
 
 export const UIProvider: FC<Props> = ({ children }) => {
@@ -74,6 +76,13 @@ export const UIProvider: FC<Props> = ({ children }) => {
     dispatch({ type: '[UI] - turn present value switch', payload: arg });
   };
 
+  const changeAdjustContributions = (arg: boolean) => {
+    dispatch({
+      type: '[UI] - change adjust contributions checkbox',
+      payload: arg,
+    });
+  };
+
   return (
     <UIContext.Provider
       value={{
@@ -89,6 +98,7 @@ export const UIProvider: FC<Props> = ({ children }) => {
         showPhoneModal,
         showSigninModal,
         turnPresentValueSwitch,
+        changeAdjustContributions,
       }}
     >
       {children}

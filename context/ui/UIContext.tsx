@@ -9,6 +9,7 @@ interface ContextProps {
   phoneModalOpen: boolean;
   signinOpen: boolean;
   isPresentValueSwitchChecked: boolean;
+  isAdjustContributionsChecked: boolean;
 
   // methods
   openSidemenu: () => void;
@@ -25,6 +26,7 @@ interface ContextProps {
   showPhoneModal: (arg: boolean) => void;
   showSigninModal: (arg: boolean) => void;
   turnPresentValueSwitch: (arg: boolean) => void;
+  changeAdjustContributions: (arg: boolean) => void;
 }
 
 export const UIContext = createContext({} as ContextProps);

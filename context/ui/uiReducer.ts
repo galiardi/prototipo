@@ -11,7 +11,8 @@ type UIActionType =
   | { type: '[UI] - show copy toast'; payload: boolean }
   | { type: '[UI] - show phone modal'; payload: boolean }
   | { type: '[UI] - show signin modal'; payload: boolean }
-  | { type: '[UI] - turn present value switch'; payload: boolean };
+  | { type: '[UI] - turn present value switch'; payload: boolean }
+  | { type: '[UI] - change adjust contributions checkbox'; payload: boolean };
 
 export const uiReducer = (state: UIState, action: UIActionType): UIState => {
   switch (action.type) {
@@ -79,6 +80,12 @@ export const uiReducer = (state: UIState, action: UIActionType): UIState => {
       return {
         ...state,
         isPresentValueSwitchChecked: action.payload,
+      };
+
+    case '[UI] - change adjust contributions checkbox':
+      return {
+        ...state,
+        isAdjustContributionsChecked: action.payload,
       };
 
     default:

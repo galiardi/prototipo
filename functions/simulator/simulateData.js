@@ -1,4 +1,4 @@
-import { getPresentValue, getBalanceByRate } from '../functions';
+import { getPresentValue, getBalanceByRate } from '..';
 
 export const simulateData = (state) => {
   const initialCapital = Number(state.initialCapital);

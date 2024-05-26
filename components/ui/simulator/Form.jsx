@@ -1,7 +1,14 @@
 import { useContext, useEffect, useCallback } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Typography,
+  FormControlLabel,
+  Checkbox,
+} from '@mui/material';
 import { Alternative } from './Alternative';
 import { SimulatorDataContext } from '../../../context/simulatorData';
+import { UIContext } from '../../../context/ui';
 
 export const Form = () => {
   const {
@@ -17,6 +24,9 @@ export const Form = () => {
     onCalculate,
     setInflationRate,
   } = useContext(SimulatorDataContext);
+
+  const { isAdjustContributionsChecked, changeAdjustContributions } =
+    useContext(UIContext);
 
   const cachedSetInflationRate = useCallback(setInflationRate, []);
 
@@ -39,7 +49,7 @@ export const Form = () => {
               />
             </div>
           </div>
-          <div>
+          <div style={{ marginBottom: 0 }}>
             <div className="inputDiv">
               <p>Aporte anual</p>
               <input
@@ -50,7 +60,34 @@ export const Form = () => {
               />
             </div>
           </div>
-          <div>
+
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'start',
+              justifyContent: 'center',
+            }}
+          >
+            <Checkbox
+              checked={isAdjustContributionsChecked}
+              onChange={() =>
+                changeAdjustContributions(!isAdjustContributionsChecked)
+              }
+              inputProps={{ 'aria-label': 'controlled' }}
+              sx={{ padding: 0 }}
+              color="secondary"
+            />
+            <Box>
+              <Typography sx={{ fontSize: '0.7rem' }}>
+                Ajustar aportes futuros para mantener
+              </Typography>
+              <Typography sx={{ fontSize: '0.7rem' }}>
+                su valor presente.
+              </Typography>
+            </Box>
+          </Box>
+
+          <div style={{ marginTop: 0 }}>
             <div className="inputDiv">
               <p>Años</p>
               <input
