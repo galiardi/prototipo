@@ -12,7 +12,7 @@ export const simulateData = (state) => {
     years,
     inflation: state.inflationRate,
   });
-  console.log(state.inflationRate);
+
   const firstContribution =
     annualContribution * (1 + state.inflationRate / 100);
 
@@ -21,7 +21,6 @@ export const simulateData = (state) => {
     adjustedContriburionsSum +=
       firstContribution * Math.pow(1 + state.inflationRate / 100, k - 1);
   }
-
   const totalContributionWAC = initialCapital + adjustedContriburionsSum;
   const totalContributionWACPV = getPresentValue({
     futureValue: totalContributionWAC,

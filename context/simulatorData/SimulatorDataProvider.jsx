@@ -70,7 +70,7 @@ export const SimulatorDataProvider = ({ children }) => {
     const inflationRate = getAverageAnnualInflation(ipcSerie.data.Obs);
     setState({ ...state, inflationRate });
   };
-  console.log(state);
+
   return (
     <SimulatorDataContext.Provider
       value={{

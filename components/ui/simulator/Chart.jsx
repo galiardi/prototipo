@@ -68,6 +68,7 @@ export const Chart = () => {
   const totalContributionWACPV = Math.round(
     simulatorData.totalContributionWACPV
   );
+  console.table(simulatorData);
 
   const data = {
     labels: [''],
