@@ -52,6 +52,22 @@ export const Chart = () => {
   const balance2 = Math.round(simulatorData.alternative2.balance);
   const balance1PV = Math.round(simulatorData.alternative1.balancePV);
   const balance2PV = Math.round(simulatorData.alternative2.balancePV);
+  const balance1WAC = Math.round(
+    simulatorData.alternative1.balanceWithAdjustedContributions
+  );
+  const balance1WACPV = Math.round(
+    simulatorData.alternative1.balanceWithAdjustedContributionsPV
+  );
+  const balance2WAC = Math.round(
+    simulatorData.alternative2.balanceWithAdjustedContributions
+  );
+  const balance2WACPV = Math.round(
+    simulatorData.alternative2.balanceWithAdjustedContributionsPV
+  );
+  const totalContributionWAC = Math.round(simulatorData.totalContributionWAC);
+  const totalContributionWACPV = Math.round(
+    simulatorData.totalContributionWACPV
+  );
 
   const data = {
     labels: [''],

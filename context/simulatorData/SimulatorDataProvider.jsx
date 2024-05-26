@@ -18,10 +18,22 @@ export const SimulatorDataProvider = ({ children }) => {
     inflationRate: 'cargando...',
     totalContribution: 0,
     totalContributionPV: 0,
-    alternative1: { balance: 0, balancePV: 0 },
-    alternative2: { balance: 0, balancePV: 0 },
+    alternative1: {
+      balance: 0,
+      balancePV: 0,
+      balanceWithAdjustedContributions: 0,
+      balanceWithAdjustedContributionsPV: 0,
+    },
+    alternative2: {
+      balance: 0,
+      balancePV: 0,
+      balanceWithAdjustedContributions: 0,
+      balanceWithAdjustedContributionsPV: 0,
+    },
     alternative1label: '',
     alternative2label: '',
+    totalContributionWAC: 0,
+    totalContributionWACPV: 0,
   });
 
   const onInputChange = (e) => {
@@ -36,7 +48,10 @@ export const SimulatorDataProvider = ({ children }) => {
       totalContributionPV,
       alternative1,
       alternative2,
+      totalContributionWAC,
+      totalContributionWACPV,
     } = simulateData({ ...state });
+
     setState({
       ...state,
       totalContribution,
@@ -45,6 +60,8 @@ export const SimulatorDataProvider = ({ children }) => {
       alternative2,
       alternative1label: state.alternative1Name,
       alternative2label: state.alternative2Name,
+      totalContributionWAC,
+      totalContributionWACPV,
     });
   };
 
@@ -53,7 +70,7 @@ export const SimulatorDataProvider = ({ children }) => {
     const inflationRate = getAverageAnnualInflation(ipcSerie.data.Obs);
     setState({ ...state, inflationRate });
   };
-
+  console.log(state);
   return (
     <SimulatorDataContext.Provider
       value={{

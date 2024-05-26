@@ -6,3 +6,4 @@ export * from './getGeneralIpcSerie';
 export * from './getAverageAnnualInflation';
 export * from './getBalanceByRate';
 export * from './simulateData';
+export * from './getBalanceWithAdjustedContributions';

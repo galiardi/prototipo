@@ -12,6 +12,22 @@ export const simulateData = (state) => {
     years,
     inflation: state.inflationRate,
   });
+  console.log(state.inflationRate);
+  const firstContribution =
+    annualContribution * (1 + state.inflationRate / 100);
+
+  let adjustedContriburionsSum = 0;
+  for (let k = 1; k <= years; k++) {
+    adjustedContriburionsSum +=
+      firstContribution * Math.pow(1 + state.inflationRate / 100, k - 1);
+  }
+
+  const totalContributionWAC = initialCapital + adjustedContriburionsSum;
+  const totalContributionWACPV = getPresentValue({
+    futureValue: totalContributionWAC,
+    years,
+    inflation: state.inflationRate,
+  });
 
   const alternative1 = getBalanceByRate({
     ...state,
@@ -22,5 +38,12 @@ export const simulateData = (state) => {
     alternativeRate: state.alternative2Rate,
   });
 
-  return { totalContribution, totalContributionPV, alternative1, alternative2 };
+  return {
+    totalContribution,
+    totalContributionPV,
+    alternative1,
+    alternative2,
+    totalContributionWAC, // with adjusted contributions
+    totalContributionWACPV, // with adjusted constributions present value
+  };
 };

@@ -1,4 +1,5 @@
 import { getBalance } from './getBalance';
+import { getBalanceWithAdjustedContributions } from './getBalanceWithAdjustedContributions';
 import { getPresentValue } from './getPresentValue';
 
 export const getBalanceByRate = (state) => {
@@ -19,5 +20,23 @@ export const getBalanceByRate = (state) => {
     inflation: state.inflationRate,
   });
 
-  return { balance, balancePV };
+  const balanceWithAdjustedContributions = getBalanceWithAdjustedContributions({
+    initialCapital,
+    annualContribution,
+    years,
+    rate: interestRate,
+    inflation: state.inflationRate,
+  });
+  const balanceWithAdjustedContributionsPV = getPresentValue({
+    futureValue: balanceWithAdjustedContributions,
+    years,
+    inflation: state.inflationRate,
+  });
+
+  return {
+    balance,
+    balancePV,
+    balanceWithAdjustedContributions,
+    balanceWithAdjustedContributionsPV,
+  };
 };
