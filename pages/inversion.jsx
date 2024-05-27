@@ -4,7 +4,7 @@ const Inversion = () => {
   return (
     <CategoryPage
       category={'inversion'}
-      title={'Inversion'}
+      title={'Inversión'}
       imgSrc={'/images/inversion.webp'}
     />
   );

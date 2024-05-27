@@ -4,7 +4,7 @@ const Prevision = () => {
   return (
     <CategoryPage
       category={'prevision'}
-      title={'Prevision'}
+      title={'Previsión'}
       imgSrc={'/images/prevision.jpg'}
     />
   );

@@ -23,9 +23,9 @@ import { FavoritesContext } from '../../context/favorites';
 
 const pages = {
   ahorro: 'ahorro',
-  inversión: 'inversion',
+  inversion: 'inversión',
   vivienda: 'vivienda',
-  previsión: 'prevision',
+  prevision: 'previsión',
 };
 
 const db = firebase.firestore();
@@ -87,9 +87,7 @@ export const Tip = ({ tip, isFavorite, categoryLink }) => {
                 aria-controls="panel2-content"
                 id="panel2-header"
               >
-                <Typography sx={{ fontWeight: 'bold', textAlign: 'justify' }}>
-                  {title}
-                </Typography>
+                <Typography sx={{ fontWeight: 'bold' }}>{title}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <Typography textAlign={'justify'}>{description}</Typography>
@@ -118,12 +116,12 @@ export const Tip = ({ tip, isFavorite, categoryLink }) => {
               <CardActions>
                 {categoryLink ? (
                   <>
-                    <Link href={`/${pages[category]}`}>
+                    <Link href={`/${category}`}>
                       <Typography
                         sx={{ fontSize: '0.8rem' }}
                         color="text.secondary"
                       >
-                        Ver mas tips de {category}
+                        Ver mas tips de {pages[category]}
                       </Typography>
                     </Link>
                   </>
@@ -133,7 +131,7 @@ export const Tip = ({ tip, isFavorite, categoryLink }) => {
                       sx={{ fontSize: '0.8rem' }}
                       color="text.secondary"
                     >
-                      categoría: {category}
+                      categoría: {pages[category]}
                     </Typography>
                   </>
                 )}

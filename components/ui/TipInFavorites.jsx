@@ -22,9 +22,9 @@ import { FavoritesContext } from '../../context/favorites';
 
 const pages = {
   ahorro: 'ahorro',
-  inversión: 'inversion',
+  inversion: 'inversión',
   vivienda: 'vivienda',
-  previsión: 'prevision',
+  prevision: 'previsión',
 };
 
 const db = firebase.firestore();
@@ -102,12 +102,12 @@ export const TipInFavorites = ({ tip }) => {
                 </IconButton>
               </CardActions>
               <CardActions>
-                <Link href={`/${pages[category]}`}>
+                <Link href={`/${category}`}>
                   <Typography
                     sx={{ fontSize: '0.8rem' }}
                     color="text.secondary"
                   >
-                    Ver mas tips de {category}
+                    Ver mas tips de {pages[category]}
                   </Typography>
                 </Link>
               </CardActions>
