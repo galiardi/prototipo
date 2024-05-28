@@ -15,7 +15,7 @@ export const SimulatorDataProvider = ({ children }) => {
     alternative2Name: 'Alternativa 2',
     alternative1Rate: '',
     alternative2Rate: '',
-    inflationRate: 'cargando...',
+    inflationRate: '',
     totalContribution: 0,
     totalContributionPV: 0,
     alternative1: {
@@ -37,8 +37,13 @@ export const SimulatorDataProvider = ({ children }) => {
   });
 
   const onInputChange = (e) => {
+    let newFormData;
     const { name, value } = e.target;
-    const newFormData = { ...state, [name]: value };
+    if (name === 'inflationRate') {
+      newFormData = { ...state, [name]: Number(value) };
+    } else {
+      newFormData = { ...state, [name]: value };
+    }
     setState(newFormData);
   };
 
@@ -70,6 +75,8 @@ export const SimulatorDataProvider = ({ children }) => {
     const inflationRate = getAverageAnnualInflation(ipcSerie.data.Obs);
     setState({ ...state, inflationRate });
   };
+
+  // console.table(state);
 
   return (
     <SimulatorDataContext.Provider

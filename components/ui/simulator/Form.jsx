@@ -100,11 +100,11 @@ export const Form = () => {
           </div>
           <div>
             <div className="inputDiv">
-              <p>Tasa de inflación anual (%)</p>
+              <p>Tasa de inflación anual (%)*</p>
               <input
-                type="text"
+                type="number"
                 name="inflationRate"
-                value={`${inflationRate}*`}
+                value={inflationRate}
                 onChange={onInputChange}
               />
             </div>
@@ -125,8 +125,8 @@ export const Form = () => {
           />
         </form>
         <Typography sx={{ fontSize: '0.7rem' }}>
-          *Promedio de la variación anual del IPC de los últimos 25 años
-          contados desde el mes actual.
+          *Valor propuesto corresponde al promedio de la variación anual del IPC
+          de los últimos 25 años contados desde el mes actual.
         </Typography>
         <Box sx={{ padding: '1.5rem' }}>
           <Button
