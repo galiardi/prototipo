@@ -77,7 +77,7 @@ export const Uploader = () => {
                 type="text"
                 name="title"
                 value={formData.title}
-                maxLength={50}
+                maxLength={250}
                 onChange={onInputChange}
                 placeholder={'Título'}
               />
@@ -92,7 +92,7 @@ export const Uploader = () => {
               <textarea
                 name="description"
                 value={formData.description}
-                maxLength={1000}
+                maxLength={10000}
                 onChange={onInputChange}
                 placeholder={'Descripción'}
                 rows={7}
