@@ -9,7 +9,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { FormControlLabel, Box } from '@mui/material';
+import { FormControlLabel, Box, Typography } from '@mui/material';
 import { PresentValueSwitch } from './PresentValueSwitch';
 import { UIContext } from '../../../context/ui';
 import { SimulatorDataContext } from '../../../context/simulatorData';
@@ -47,6 +47,7 @@ export const Chart = () => {
     isPresentValueSwitchChecked,
     turnPresentValueSwitch,
     isAdjustContributionsChecked,
+    changeAdjustContributions,
   } = useContext(UIContext);
 
   const totalContributionPV = Math.round(simulatorData.totalContributionPV);
@@ -134,7 +135,7 @@ export const Chart = () => {
         options={options}
         data={isAdjustContributionsChecked ? dataWAC : data}
       />
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box>
         <FormControlLabel
           control={
             <PresentValueSwitch
@@ -146,7 +147,31 @@ export const Chart = () => {
               inputProps={{ 'aria-label': 'controlled' }}
             />
           }
-          label="Ajustar a valor presente"
+          label={
+            <Typography sx={{ fontSize: '0.9rem' }}>
+              Ajustar a valor presente
+            </Typography>
+          }
+        />
+      </Box>
+      <Box>
+        <FormControlLabel
+          control={
+            <PresentValueSwitch
+              sx={{ m: 1 }}
+              checked={isAdjustContributionsChecked}
+              onChange={() => {
+                changeAdjustContributions(!isAdjustContributionsChecked);
+              }}
+              inputProps={{ 'aria-label': 'controlled' }}
+            />
+          }
+          label={
+            <Typography sx={{ fontSize: '0.9rem' }}>
+              Ajustar los aportes futuros a valor presente para mantener su
+              valor actual
+            </Typography>
+          }
         />
       </Box>
     </>
